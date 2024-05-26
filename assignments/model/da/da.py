@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import create_database, database_exists
-from model.entity.base import Base
+from assignments.model.entity import Base
 
 connection_string = "mysql+pymysql://root:root123@localhost:3306/mft"
 if not database_exists(connection_string):
@@ -12,16 +12,6 @@ Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
 session = Session()
-patient  = Patient("ali", "alipour")
-doctor = Doctor("reza", "rezaii", "skin")
-
-med = MedicalReport(patient, doctor, "descrip.....")
-
-session.add(med)
-
-session.commit()
-session.close()
-
 
 class DataAccess:
     def __init__(self, class_name):
